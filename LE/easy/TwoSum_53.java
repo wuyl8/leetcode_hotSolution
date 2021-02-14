@@ -9,7 +9,8 @@ import java.util.HashMap;
  */
 public class TwoSum_53 {
 
-    public int[] twoSum1(int[] nums, int target) {
+    // 暴力法：时间复杂度n^2
+    private int[] twoSum1(int[] nums, int target) {
         for(int i=0;i<nums.length;i++){
             for(int j=i+1;j<nums.length;j++){
                 if(nums[i] == target-nums[j]){
@@ -19,9 +20,9 @@ public class TwoSum_53 {
         }
         throw new IllegalArgumentException("NO TWO SUM SOLUTION");
     }
-
-    public  int[] twoSum2(int[] nums, int target){
-        HashMap<Integer,Integer> hashMap = new HashMap();
+    // 通过维护一个hash表，来使查找target-nums[j]的时间复杂度由n^2降低为n
+    private int[] twoSum2(int[] nums, int target){
+        HashMap<Integer,Integer> hashMap = new HashMap<>();
         for (int i=0;i<nums.length;i++){
             hashMap.put(nums[i],i);
         }
@@ -34,8 +35,8 @@ public class TwoSum_53 {
         throw new IllegalArgumentException("no two sum solution");
     }
 
-    public int[] twoSum3(int[] nums,int target){
-        HashMap<Integer,Integer> hashMap = new HashMap();
+    private int[] twoSum3(int[] nums,int target){
+        HashMap<Integer,Integer> hashMap = new HashMap<>();
         for(int i=0;i<nums.length;i++){
             int key = target-nums[i];
             if(hashMap.containsKey(target-nums[i]) && i!=hashMap.get(key)){
@@ -46,10 +47,10 @@ public class TwoSum_53 {
         throw new IllegalArgumentException("no two sum solution");
     }
 
-    public int[] twoSum4(int[] nums, int target) {
+    private int[] twoSum4(int[] nums, int target) {
         int[] indexs = new int[2];
         // 建立k-v ，一一对应的哈希表
-        HashMap<Integer,Integer> hashMap = new HashMap<Integer,Integer>();
+        HashMap<Integer,Integer> hashMap = new HashMap<>();
         for(int i = 0; i < nums.length; i++){
             if(hashMap.containsKey(nums[i])){
                 indexs[0] = hashMap.get(nums[i]);
@@ -62,7 +63,7 @@ public class TwoSum_53 {
         return indexs;
     }
 
-    public int[] twoSum(int[] numbs,int target){
+    private int[] twoSum(int[] numbs, int target){
         return twoSum4(numbs,target);
     }
 
@@ -72,37 +73,37 @@ public class TwoSum_53 {
         String message = flag?"通过":"不通过";
         System.out.println("测试"+message);
     }
-    public  boolean testTwoSum1(){
+    private  boolean testTwoSum1(){
         int[] numbs = {2,7,12,11};
         int target = 13;
         int[] trueResult = {0,3};
         int[] result = twoSum(numbs,target);
         //Arrays.sort(result);
-        Boolean flag = Arrays.equals(trueResult,result);
+        boolean flag = Arrays.equals(trueResult,result);
         System.out.println("测试1结果："+flag+"，result={"+result[0]+","+result[1]+"}");
         return flag;
     }
-    public  boolean testTwoSum2(){
+    private  boolean testTwoSum2(){
         int[] numbs = {3,2,4};
         int target = 6;
         int[] trueResult = {1,2};
         int[] result = twoSum(numbs,target);
         //Arrays.sort(result);
-        Boolean flag = Arrays.equals(trueResult,result);
+        boolean flag = Arrays.equals(trueResult,result);
         System.out.println("测试2结果："+flag+"，result={"+result[0]+","+result[1]+"}");
         return flag;
     }
-    public  boolean testTwoSum3(){
+    private  boolean testTwoSum3(){
         int[] numbs = {3,3};
         int target = 6;
         int[] result = twoSum(numbs,target);
         int[] trueResult = {0,1};
         //Arrays.sort(result);
-        Boolean flag = Arrays.equals(trueResult,result);
+        boolean flag = Arrays.equals(trueResult,result);
         System.out.println("测试3结果："+flag+"，result={"+result[0]+","+result[1]+"}");
         return flag;
     }
-    public  boolean testTwoSum4(){
+    private  boolean testTwoSum4(){
         int[] numbs = {2,7,12,11};
         int target = 6;
         try{
